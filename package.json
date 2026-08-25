@@ -9,7 +9,10 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@prisma/client": "^7.9.1",
+    "dotenv": "^17.4.2",
     "next": "16.3.2",
+    "prisma": "^6.12.0",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
@@ -18,5 +21,10 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.2",
     "tailwindcss": "^4"
+  },
+  "allowScripts": {
+    "unrs-resolver@1.12.2": true,
+    "prisma@6.19.3": true,
+    "@prisma/engines@6.19.3": true
   }
 }
