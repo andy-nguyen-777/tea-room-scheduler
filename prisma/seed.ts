@@ -1,14 +1,13 @@
 import { PrismaClient } from "../src/generated/prisma/client";
+import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
 async function main() {
-  // Clear existing data first, so we don't get duplicates if rerun 
   await prisma.booking.deleteMany();
   await prisma.room.deleteMany();
   await prisma.user.deleteMany();
 
-  // Creates tea rooms while inserting multiple rows into one cell
   await prisma.room.createMany({
     data: [
       {
@@ -32,11 +31,13 @@ async function main() {
     ],
   });
 
-  // Create a test admin user
+  const hashedPassword = await bcrypt.hash("admin123", 10);
+
   await prisma.user.create({
     data: {
       name: "Admin User",
       email: "admin@tearoom.test",
+      password: hashedPassword,
       role: "admin",
     },
   });
@@ -44,7 +45,6 @@ async function main() {
   console.log("Seed data created successfully.");
 }
 
-// Wrapper while ensuring error catching
 main()
   .catch((e) => {
     console.error(e);

@@ -33,6 +33,9 @@ model User {
   // Guarantees no two users can share an email
   email     String    @unique
 
+  // 8/30: Added login password
+  password String
+
   // Initializes role based access control (RBAC) between "customer" and "admin"
   role      String    @default("customer")
 
